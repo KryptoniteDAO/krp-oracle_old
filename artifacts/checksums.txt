@@ -1,0 +1,2 @@
+2e77db9e052da01e8bb1db1c95eef1ed2dc23b63e4a87d5165fa48e0f105522a  mock_oracle.wasm
+05368f59bc7c5f50635f0abca05d8715c08ab95e111e96cbfddea28a1d42769e  oracle_pyth.wasm
