@@ -19,6 +19,7 @@ pub struct SetConfigFeedValidMsg {
 pub struct ChangeOwnerMsg {
     pub new_owner: String,
 }
+
 #[cw_serde]
 pub struct ChangePythContract {
     pub new_contract: String,
@@ -77,7 +78,7 @@ pub enum ExecuteMsg {
     ChangeOwner {
         new_owner: String,
     },
-    ChangePythContract{
+    ChangePythContract {
         pyth_contract: String,
     },
 }

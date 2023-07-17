@@ -69,9 +69,9 @@ pub fn query(deps: Deps, env: Env, msg: QueryMsg) -> StdResult<Binary> {
         QueryMsg::QueryConfig {} => to_binary(&query_config(deps)?),
         QueryMsg::QueryPythFeederConfig { asset } => {
             to_binary(&query_pyth_feeder_config(deps, asset)?)
-        },
-        QueryMsg::QueryExchangeRateByAssetLabel {base_label, quote_label} => {
-            to_binary(&query_exchange_rate_by_asset_label(deps, env,base_label, quote_label)?)
+        }
+        QueryMsg::QueryExchangeRateByAssetLabel { base_label, quote_label } => {
+            to_binary(&query_exchange_rate_by_asset_label(deps, env, base_label, quote_label)?)
         }
     }
 }
@@ -80,9 +80,9 @@ pub fn query(deps: Deps, env: Env, msg: QueryMsg) -> StdResult<Binary> {
 pub fn migrate(_deps: DepsMut, _env: Env, _msg: MigrateMsg) -> StdResult<Response> {
     Ok(Response::default())
 }
+
 #[cfg(test)]
 mod tests {
-
     #[test]
     fn proper_initialization() {}
 }

@@ -43,6 +43,9 @@ pub fn query_price(deps: Deps, env: Env, asset: String) -> StdResult<PriceRespon
 
     let pyth_feeder_config: PythFeederConfig =
         read_pyth_feeder_config(deps.storage, asset.clone())?;
+    if !pyth_feeder_config.is_valid {
+        return Err(StdError::generic_err("Asset is not valid"));
+    }
 
     let pyth_contract = deps.api.addr_humanize(&config.pyth_contract)?;
 
@@ -103,9 +106,10 @@ pub fn query_price(deps: Deps, env: Env, asset: String) -> StdResult<PriceRespon
         last_updated_quote: feed_time_u64,
     })
 }
+
 /**
-* Query the prices of the given assets
-*/
+ * Query the prices of the given assets
+ */
 pub fn query_prices(deps: Deps, env: Env, assets: Vec<String>) -> StdResult<Vec<PriceResponse>> {
     let mut prices = Vec::new();
     for asset in assets {
@@ -115,7 +119,7 @@ pub fn query_prices(deps: Deps, env: Env, assets: Vec<String>) -> StdResult<Vec<
     Ok(prices)
 }
 
-pub fn query_exchange_rate_by_asset_label(deps: Deps, env: Env,base_label:String,quote_label:String) -> StdResult<Decimal256> {
+pub fn query_exchange_rate_by_asset_label(deps: Deps, env: Env, base_label: String, quote_label: String) -> StdResult<Decimal256> {
     let base_price = query_price(deps.clone(), env.clone(), base_label)?;
     let quote_price = query_price(deps.clone(), env.clone(), quote_label)?;
     Ok(base_price.emv_price.div(quote_price.emv_price))
