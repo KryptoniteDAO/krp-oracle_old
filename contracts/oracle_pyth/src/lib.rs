@@ -7,4 +7,4 @@ mod handler;
 mod querier;
 
 #[cfg(test)]
-mod tests;
+mod testing;
