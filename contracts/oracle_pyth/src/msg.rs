@@ -1,5 +1,5 @@
 use cosmwasm_bignumber::Decimal256;
-use cosmwasm_schema::cw_serde;
+use cosmwasm_schema::{cw_serde, QueryResponses};
 use cosmwasm_std::Addr;
 use pyth_sdk_cw::PriceIdentifier;
 
@@ -84,11 +84,17 @@ pub enum ExecuteMsg {
 }
 
 #[cw_serde]
+#[derive(QueryResponses)]
 pub enum QueryMsg {
+    #[returns(PriceResponse)]
     QueryPrice { asset: String },
+    #[returns(Vec < PriceResponse >)]
     QueryPrices { assets: Vec<String> },
+    #[returns(ConfigResponse)]
     QueryConfig {},
+    #[returns(PythFeederConfigResponse)]
     QueryPythFeederConfig { asset: String },
+    #[returns(Decimal256)]
     QueryExchangeRateByAssetLabel { base_label: String, quote_label: String },
 }
 
