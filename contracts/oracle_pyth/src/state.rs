@@ -55,7 +55,3 @@ pub fn read_pyth_feeder_config(
         .ok_or_else(|| StdError::generic_err("Pyth feeder config not found"));
     Ok(pyth_feeder_config.unwrap())
 }
-
-
-
-

@@ -1,8 +1,10 @@
 use crate::error::ContractError;
-use crate::state::{read_config, read_pyth_feeder_config, store_config, store_pyth_feeder_config, Config, PythFeederConfig};
+use crate::state::{
+    read_config, read_pyth_feeder_config, store_config, store_pyth_feeder_config, Config,
+    PythFeederConfig,
+};
 use cosmwasm_std::{DepsMut, MessageInfo, Response};
 use pyth_sdk_cw::PriceIdentifier;
-
 
 /**
  * Update the config of the contract

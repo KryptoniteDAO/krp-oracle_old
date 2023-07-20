@@ -1,8 +1,8 @@
-use std::ops::Div;
 use crate::msg::{ConfigResponse, PriceResponse, PythFeederConfigResponse};
 use cosmwasm_bignumber::Decimal256;
 use cosmwasm_std::{Deps, Env, StdError, StdResult};
 use pyth_sdk_cw::{query_price_feed, Price, PriceFeedResponse};
+use std::ops::Div;
 
 use crate::error::ContractError;
 use crate::state::{read_config, read_pyth_feeder_config, Config, PythFeederConfig};
@@ -115,7 +115,12 @@ pub fn query_prices(deps: Deps, env: Env, assets: Vec<String>) -> StdResult<Vec<
     Ok(prices)
 }
 
-pub fn query_exchange_rate_by_asset_label(deps: Deps, env: Env,base_label:String,quote_label:String) -> StdResult<Decimal256> {
+pub fn query_exchange_rate_by_asset_label(
+    deps: Deps,
+    env: Env,
+    base_label: String,
+    quote_label: String,
+) -> StdResult<Decimal256> {
     let base_price = query_price(deps.clone(), env.clone(), base_label)?;
     let quote_price = query_price(deps.clone(), env.clone(), quote_label)?;
     Ok(base_price.emv_price.div(quote_price.emv_price))

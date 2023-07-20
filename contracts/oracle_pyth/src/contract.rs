@@ -1,7 +1,10 @@
 use crate::error::ContractError;
 use crate::handler::{change_owner, change_pyth_contract, config_feed_info, set_config_feed_valid};
 use crate::msg::{ExecuteMsg, InstantiateMsg, MigrateMsg, QueryMsg};
-use crate::querier::{query_config, query_exchange_rate_by_asset_label, query_price, query_prices, query_pyth_feeder_config};
+use crate::querier::{
+    query_config, query_exchange_rate_by_asset_label, query_price, query_prices,
+    query_pyth_feeder_config,
+};
 use crate::state::{store_config, Config};
 use cosmwasm_std::{
     entry_point, to_binary, Binary, Deps, DepsMut, Env, MessageInfo, Response, StdResult,
@@ -57,7 +60,9 @@ pub fn execute(
             set_config_feed_valid(deps, info, asset, valid)
         }
         ExecuteMsg::ChangeOwner { new_owner } => change_owner(deps, info, new_owner),
-        ExecuteMsg::ChangePythContract { pyth_contract } => change_pyth_contract(deps, info, pyth_contract),
+        ExecuteMsg::ChangePythContract { pyth_contract } => {
+            change_pyth_contract(deps, info, pyth_contract)
+        }
     }
 }
 
@@ -69,20 +74,20 @@ pub fn query(deps: Deps, env: Env, msg: QueryMsg) -> StdResult<Binary> {
         QueryMsg::QueryConfig {} => to_binary(&query_config(deps)?),
         QueryMsg::QueryPythFeederConfig { asset } => {
             to_binary(&query_pyth_feeder_config(deps, asset)?)
-        },
-        QueryMsg::QueryExchangeRateByAssetLabel {base_label, quote_label} => {
-            to_binary(&query_exchange_rate_by_asset_label(deps, env,base_label, quote_label)?)
         }
+        QueryMsg::QueryExchangeRateByAssetLabel {
+            base_label,
+            quote_label,
+        } => to_binary(&query_exchange_rate_by_asset_label(
+            deps,
+            env,
+            base_label,
+            quote_label,
+        )?),
     }
 }
 
 #[cfg_attr(not(feature = "library"), entry_point)]
 pub fn migrate(_deps: DepsMut, _env: Env, _msg: MigrateMsg) -> StdResult<Response> {
     Ok(Response::default())
-}
-#[cfg(test)]
-mod tests {
-
-    #[test]
-    fn proper_initialization() {}
 }

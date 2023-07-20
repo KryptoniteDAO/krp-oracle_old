@@ -1,16 +1,11 @@
+use cosmwasm_schema::{cw_serde, QueryResponses};
 use pyth_sdk_cw::PriceIdentifier;
-use cosmwasm_schema::{cw_serde,QueryResponses};
 
 #[cw_serde]
-pub struct InstantiateMsg {
-}
+pub struct InstantiateMsg {}
 #[cw_serde]
 pub enum ExecuteMsg {
-    UpdatePriceFeed {
-        id: PriceIdentifier,
-        price: i64,
-
-    }
+    UpdatePriceFeed { id: PriceIdentifier, price: i64 },
 }
 
 #[cw_serde]
@@ -19,8 +14,6 @@ pub enum QueryMsg {
     #[returns(PriceFeedResponse)]
     PriceFeed { id: PriceIdentifier },
 }
-
-
 
 #[cw_serde]
 pub struct PriceFeedResponse {

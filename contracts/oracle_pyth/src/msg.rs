@@ -19,6 +19,7 @@ pub struct SetConfigFeedValidMsg {
 pub struct ChangeOwnerMsg {
     pub new_owner: String,
 }
+
 #[cw_serde]
 pub struct ChangePythContract {
     pub new_contract: String,
@@ -77,18 +78,27 @@ pub enum ExecuteMsg {
     ChangeOwner {
         new_owner: String,
     },
-    ChangePythContract{
+    ChangePythContract {
         pyth_contract: String,
     },
 }
 
 #[cw_serde]
 pub enum QueryMsg {
-    QueryPrice { asset: String },
-    QueryPrices { assets: Vec<String> },
+    QueryPrice {
+        asset: String,
+    },
+    QueryPrices {
+        assets: Vec<String>,
+    },
     QueryConfig {},
-    QueryPythFeederConfig { asset: String },
-    QueryExchangeRateByAssetLabel { base_label: String, quote_label: String },
+    QueryPythFeederConfig {
+        asset: String,
+    },
+    QueryExchangeRateByAssetLabel {
+        base_label: String,
+        quote_label: String,
+    },
 }
 
 #[cw_serde]
