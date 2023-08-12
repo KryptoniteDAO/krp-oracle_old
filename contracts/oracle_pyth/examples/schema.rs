@@ -2,7 +2,7 @@ use std::env::current_dir;
 use std::fs::create_dir_all;
 
 use cosmwasm_schema::{export_schema, remove_schemas, schema_for};
-use moneymarket_oracle_pyth::msg::{
+use oracle_pyth::msg::{
     ChangeOwnerMsg, ConfigResponse, ExecuteMsg, InstantiateMsg, PriceResponse,
     PythFeederConfigResponse, QueryMsg, SetConfigFeedValidMsg,
 };
