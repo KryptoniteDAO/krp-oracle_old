@@ -1,9 +1,9 @@
-# 说明
+# illustrate
 
-此类主要实现了一个模拟的oracle合约，用于测试。
-实现方法为：在合约中存储一个价格映射表，通过`update_price_feed`方法更新价格，通过`price_feed`方法查询价格。
+This class mainly implements a simulated oracle contract for testing.
+The implementation method is: store a price mapping table in the contract, update the price through the `update_price_feed` method, and query the price through the `price_feed` method.
 
-# 编译
+# compile
 
 ```bash
 docker run --rm -v "$(pwd)":/code \
@@ -12,7 +12,7 @@ docker run --rm -v "$(pwd)":/code \
   cosmwasm/rust-optimizer:0.12.11
 ```
 
-# 部署
+# deploy
 
 ```bash
 seid tx wasm store artifacts/mock_oracle.wasm -y --from=admin \
@@ -20,7 +20,7 @@ seid tx wasm store artifacts/mock_oracle.wasm -y --from=admin \
 --gas=1225925 --gas-prices=0.01usei --broadcast-mode=block
 ```
 
-# 实例化
+# Instantiate
 
 ```bash
 seid tx wasm instantiate 750 '{}' \
@@ -29,13 +29,13 @@ seid tx wasm instantiate 750 '{}' \
 --admin sei13xy3940qrar0k82k7fzhjpqaxj0h0tep7cpuxz
 ```
 
-返回合约地址：`sei1f6ctrws0eqha3nn7gxetj7h95wlmjrslwqgs9ecumf4cs00wktfstel0m9`
+Return contract address: `sei1f6ctrws0eqha3nn7gxetj7h95wlmjrslwqgs9ecumf4cs00wktfstel0m9`
 
-# 配置及查询
+# Configuration and query
 
-设置价格
+Set price
 
-ps:`id`必须为十六进制的字符串
+ps:`id` must be a hexadecimal string
 
 ```bash
 seid tx wasm execute sei1f6ctrws0eqha3nn7gxetj7h95wlmjrslwqgs9ecumf4cs00wktfstel0m9 \
@@ -44,7 +44,7 @@ seid tx wasm execute sei1f6ctrws0eqha3nn7gxetj7h95wlmjrslwqgs9ecumf4cs00wktfstel
 --gas=200000 --gas-prices=0.01usei --broadcast-mode=block
 ```
 
-查询价格
+price checking
 
 ```bash
 seid query wasm contract-state smart sei1f6ctrws0eqha3nn7gxetj7h95wlmjrslwqgs9ecumf4cs00wktfstel0m9 \
